@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Redaguoti projektą{% endblock %}
+
+{% block content %}
+<h2>Redaguoti projektą</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Pavadinimas</label>
+        <input type="text" class="form-control" name="pavadinimas" value="{{ projektas.pavadinimas }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Kaina (EUR)</label>
+        <input type="number" class="form-control" name="kaina" value="{{ projektas.kaina }}" required>
+    </div>
+    <button type="submit" class="btn btn-warning">Išsaugoti</button>
+</form>
+{% endblock %}

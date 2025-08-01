@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Paieškos rezultatai{% endblock %}
+
+{% block content %}
+<h2>Rezultatai paieškai: "{{ search_text }}"</h2>
+
+{% if projektas_rows %}
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Pavadinimas</th>
+                <th>Kaina</th>
+                <th>Sukurimo data</th>
+                <th>Veiksmai</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for projektas in projektas_rows %}
+            <tr>
+                <td>{{ projektas.id }}</td>
+                <td>{{ projektas.pavadinimas }}</td>
+                <td>{{ projektas.kaina }}</td>
+                <td>{{ projektas.sukurimo_data.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <a href="/redaguoti/{{ projektas.id }}" class="btn btn-warning btn-sm">✏️</a>
+                    <form method="post" action="/trinti/{{ projektas.id }}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Trinti?')">🗑️</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nerasta projektų pagal šį pavadinimą.</p>
+{% endif %}
+
+<a href="/" class="btn btn-secondary">Grįžti</a>
+{% endblock %}
+l>
